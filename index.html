@@ -134,8 +134,9 @@ header.solid{background:rgba(7,3,16,.72);backdrop-filter:blur(14px);border-color
 .hero-can{position:relative;justify-self:center}
 .hero-can .glow{position:absolute;inset:-12% -6%;
   background:radial-gradient(closest-side,rgba(176,38,255,.42),transparent 72%);filter:blur(8px);z-index:-1}
-.hero-can img{border-radius:14px;border:1px solid var(--line);
-  box-shadow:0 40px 90px -30px rgba(176,38,255,.6);animation:bob 6s ease-in-out infinite}
+.hero-can img{border-radius:0;border:none;background:transparent;
+  filter:drop-shadow(0 40px 60px rgba(176,38,255,.55));animation:bob 6s ease-in-out infinite;
+  max-height:520px;width:auto}
 @keyframes bob{50%{transform:translateY(-12px)}}
 .scrollcue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;
   font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);
