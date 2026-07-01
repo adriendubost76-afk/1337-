@@ -525,16 +525,15 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:56px
   function barVal(p, start, span){ return clamp01((p-start)/span); }
 
   var lastSeek = -1;
+  var playing = false;
   function frame(){
     if(ready){
       var p = progress();
       if(!reduce){
-        targetT = p * Math.max(dur - 0.05, 0);
-        // smooth seek
-        curT += (targetT - curT) * 0.18;
-        if(Math.abs(curT - lastSeek) > 0.012){
-          try{ vid.currentTime = curT; lastSeek = curT; }catch(e){}
-        }
+        // native playback while the section is in view: smooth, no per-frame seeking
+        var inView = p > 0 && p < 1;
+        if(inView && !playing){ playing = true; vid.play().catch(function(){}); }
+        else if(!inView && playing){ playing = false; vid.pause(); vid.currentTime = p <= 0 ? 0 : Math.max(dur - 0.05, 0); }
       }
       // gauge number (eased)
       var pctTarget = Math.round(p*100);
