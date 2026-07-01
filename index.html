@@ -529,10 +529,10 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:56px
     if(ready){
       var p = progress();
       if(!reduce){
-        targetT = p * Math.max(dur - 0.05, 0);
-        // smooth seek
-        curT += (targetT - curT) * 0.18;
-        if(Math.abs(curT - lastSeek) > 0.012){
+        targetT = p * Math.max(dur - 0.02, 0);
+        // direct seek: guarantees the full clip is traversed even on fast scroll
+        curT = targetT;
+        if(Math.abs(curT - lastSeek) > 0.008){
           try{ vid.currentTime = curT; lastSeek = curT; }catch(e){}
         }
       }
